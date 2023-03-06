@@ -1,0 +1,76 @@
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md7 offset-lg-4 offset-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Sign Up</h3>
+                    </div>
+                    <div class="panel-body p-3">
+                        <form [formGroup]='SignUpForm'>
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="SignUpForm.controls['FirstName'].dirty && SignUpForm.hasError('required', 'FirstName')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="FirstName" type="text" placeholder="First name" />
+                                </div>
+                            </div>
+                            <small *ngIf="SignUpForm.controls['FirstName'].dirty && SignUpForm.hasError('required', 'FirstName')" class="text-danger">*First is required</small>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="SignUpForm.controls['LastName'].dirty && SignUpForm.hasError('required', 'LastName')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="LastName" type="text" placeholder="Last name" />
+                                </div>
+                            </div>
+                            <small *ngIf="SignUpForm.controls['LastName'].dirty && SignUpForm.hasError('required', 'LastName')" class="text-danger">*Last is required</small>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="SignUpForm.controls['Email'].dirty && SignUpForm.hasError('required', 'Email')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="Email" type="text" placeholder="Email" />
+                                </div>
+                            </div>
+                            <small *ngIf="SignUpForm.controls['Email'].dirty && SignUpForm.hasError('required', 'Email')" class="text-danger">*Email is required</small>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="SignUpForm.controls['Username'].dirty && SignUpForm.hasError('required', 'Username')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="Username" type="text" placeholder="Username" />
+                                </div>
+                            </div>
+                            <small *ngIf="SignUpForm.controls['Username'].dirty && SignUpForm.hasError('required', 'Username')" class="text-danger">*Username is required</small>
+
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="SignUpForm.controls['Password'].dirty && SignUpForm.hasError('required', 'Password')">
+                                    <span class="fa fa-lock p-2"></span>
+                                        <input formControlName="Password" [type]="type" placeholder="Password" required />
+                                    <span (click)="hideShowPass()" class="fa {{ eyeIcon }} p-2"></span>
+                                </div>
+                            </div>
+                            <small *ngIf="SignUpForm.controls['Password'].dirty && SignUpForm.hasError('required', 'Password')" class="text-danger">*Password is required</small>
+                            
+                            <div class="form-inline fr mt-4">
+                                <a id="forgot" class="font-weight-bold">Forgot Password</a>
+                            </div>
+                            
+                            <button (click)="onSignUp()" class="btn btn-primary btn-block mt-4 w-100" type="submit">Sign Up</button>
+
+                            <div class="text-center pt-4 text-muted">
+                                Already have an account? <a id="login" routerLink="/login">Login</a>
+                            </div>
+
+                            <input formControlName="Role" type="text" value="string" hidden />
+                            <input formControlName="Token" type="text" value="string" hidden />
+                        </form>
+                    </div>
+
+                    <div class="mx-3 my-2 py-2 bordert">
+                        <div class="text-center py-3">
+                            social media icons here
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

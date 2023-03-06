@@ -1,0 +1,54 @@
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-2 col-lg-5 col-md7 offset-lg-4 offset-md-3">
+                <div class="panel border bg-white">
+                    <div class="panel-heading">
+                        <h3 class="pt-3 font-weight-bold">Login</h3>
+                    </div>
+                    <div class="panel-body p-3">
+                        <form [formGroup]='LoginForm'>
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="LoginForm.controls['Username'].dirty && LoginForm.hasError('required', 'Username')">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input formControlName="Username" type="text" placeholder="Username" />
+                                </div>
+                            </div>
+                            <small *ngIf="LoginForm.controls['Username'].dirty && LoginForm.hasError('required', 'Username')" class="text-danger">*Username is required</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field" [class.error]="LoginForm.controls['Password'].dirty && LoginForm.hasError('required', 'Password')">
+                                    <span class="fa fa-lock p-2"></span>
+                                        <input formControlName="Password" [type]="type" placeholder="Password" />
+                                    <span (click)="hideShowPass()" class="fa {{ eyeIcon }} p-2"></span>
+                                </div>
+                            </div>
+                            <small *ngIf="LoginForm.controls['Password'].dirty && LoginForm.hasError('required', 'Password')" class="text-danger">*Password is required</small>
+                            <div class="form-inline fr mt-4">
+                                <a id="forgot" class="font-weight-bold">Forgot Password</a>
+                            </div>
+                            
+                            <button (click)="onLogin()" class="btn btn-primary btn-block mt-4 w-100" type="submit">Login</button>
+
+                            <div class="text-center pt-4 text-muted">
+                                Don't have an account? <a id="signup" routerLink="/signup">Sign Up</a>
+                            </div>
+                            
+                            <!-- Below are hidden -->
+                            <input formControlName="Email" type="text" value="string" hidden />
+                            <input formControlName="LastName" type="text" value="string" hidden />
+                            <input formControlName="FirstName" type="text" value="string" hidden />
+                            <input formControlName="Role" type="text" value="string" hidden />
+                            <input formControlName="Token" type="text" value="string" hidden />
+                        </form>
+                    </div>
+
+                    <div class="mx-3 my-2 py-2 bordert">
+                        <div class="text-center py-3">
+                            social media icons here
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
