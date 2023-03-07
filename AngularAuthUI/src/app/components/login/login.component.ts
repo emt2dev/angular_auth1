@@ -24,7 +24,9 @@ export class LoginComponent implements OnInit {
   eyeIcon: string ="fa-eye-slash";
 
   LoginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, 
+    private auth: AuthService, 
+    private router: Router) { }
 
   ngOnInit(): void {
     this.LoginForm = this.fb.group({
@@ -55,9 +57,9 @@ export class LoginComponent implements OnInit {
 
   onLogin() {
     if (this.LoginForm.valid) {
+
       // send the obj to database
-      console.log(this.LoginForm.value);
-      
+            
       this.auth.login(this.LoginForm.value)
       .subscribe({
         next:(res) => {

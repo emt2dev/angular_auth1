@@ -52,9 +52,8 @@ export class SignupComponent implements OnInit {
 
   onSignUp() {
     if (this.SignUpForm.valid) {
+      
       // send the obj to database
-      console.log(this.SignUpForm.value);
-
       this.auth.signUp(this.SignUpForm.value)
       .subscribe({
         next:(res) => {
