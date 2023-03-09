@@ -31,10 +31,20 @@ namespace AngularAuthAPI.Controllers
             // BadRequest() is 400 error, ensures post request contains data
             if (userObj.Username == "" || userObj.Password == "") return BadRequest();
 
-            UserDTO usersDTO = new UserDTO(userObj);
+            var user = await _authContext.Users
+                .FirstOrDefaultAsync(searchFor => searchFor.Username == userObj.Username);
+
+            if (user == null) return BadRequest();
+
+            if (!PasswordHasher.VerifyPassword(userObj.Password, user.Password)) return BadRequest(new
+            {
+                Message = "Password is incorrect"
+            });
+
+            UserDTO usersDTO = new UserDTO(user);
 
             // if username found and password matches
-            return Ok(new { Message = "login Success! So nice to see you again "+usersDTO.usersUsername });
+            return Ok(new { Message = "login Success! So nice to see you again " + usersDTO.usersUsername});
             // return usersDTO;
         }
 

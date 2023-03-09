@@ -29,7 +29,7 @@ namespace AngularAuthAPI.DTOModels
             this.usersEmail = givenUser.Email;
 
             this.usersFirstName = givenUser.FirstName;
-            this.usersFirstName = givenUser.LastName;
+            this.usersLastName = givenUser.LastName;
 
             this.usersPassword = givenUser.Password;
             this.usersToken = givenUser.Token;
