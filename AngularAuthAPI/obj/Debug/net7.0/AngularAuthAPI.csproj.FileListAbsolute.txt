@@ -75,3 +75,5 @@ C:\Users\candy\OneDrive\Desktop\angular_auth\AngularAuthAPI\obj\Debug\net7.0\ref
 C:\Users\candy\OneDrive\Desktop\angular_auth\AngularAuthAPI\obj\Debug\net7.0\AngularAuthAPI.pdb
 C:\Users\candy\OneDrive\Desktop\angular_auth\AngularAuthAPI\obj\Debug\net7.0\AngularAuthAPI.genruntimeconfig.cache
 C:\Users\candy\OneDrive\Desktop\angular_auth\AngularAuthAPI\obj\Debug\net7.0\ref\AngularAuthAPI.dll
+C:\Users\candy\OneDrive\Desktop\angular_auth\AngularAuthAPI\bin\Debug\net7.0\AutoMapper.dll
+C:\Users\candy\OneDrive\Desktop\angular_auth\AngularAuthAPI\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

@@ -9,7 +9,6 @@ namespace AngularAuthAPI.Configurations
         public MapperInitializer()
         {
             CreateMap<User, UserDTO>().ReverseMap();
-            CreateMap<User, CreateUserDTO>().ReverseMap();
         }
     }
 }
