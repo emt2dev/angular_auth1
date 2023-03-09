@@ -1,6 +1,8 @@
 ﻿using AngularAuthAPI.Context;
 using AngularAuthAPI.Helpers;
 using AngularAuthAPI.Models;
+using AngularAuthAPI.DTOModels;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -29,23 +31,11 @@ namespace AngularAuthAPI.Controllers
             // BadRequest() is 400 error, ensures post request contains data
             if (userObj.Username == "" || userObj.Password == "") return BadRequest();
 
-            var user = await _authContext.Users
-                .FirstOrDefaultAsync(searchFor => searchFor.Username == userObj.Username); // shows is user exists
-
-            // if not found
-            if (user == null) return NotFound(new { Message = "user Not Found!" });
-
-            // verify password hash
-            if (!PasswordHasher.VerifyPassword(userObj.Password, user.Password))
-            {
-                return BadRequest(new
-                {
-                    Message = "Incorrect Password"
-                });
-            }
+            UserDTO usersDTO = new UserDTO(userObj);
 
             // if username found and password matches
-            return Ok(new { Message = "login Success!" });
+            return Ok(new { Message = "login Success! So nice to see you again "+usersDTO.usersUsername });
+            // return usersDTO;
         }
 
         [HttpPost("register")]
