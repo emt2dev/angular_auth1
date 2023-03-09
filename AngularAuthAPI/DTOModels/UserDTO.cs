@@ -22,7 +22,7 @@ namespace AngularAuthAPI.DTOModels
 
         public string usersRole { get; set; }
 
-        public UserDTO(User givenUserObj)
+        public UserDTO(User givenUserObj, string givenToken)
         {
             this.usersId = givenUserObj.Id;
 
@@ -31,7 +31,7 @@ namespace AngularAuthAPI.DTOModels
             this.usersUsername = givenUserObj.Username;
             this.usersPassword = givenUserObj.Password;
 
-            this.usersToken = givenUserObj.Token;
+            this.usersToken = givenToken;
             this.usersRole = givenUserObj.Role;
         }
         /*

@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Principal;
 
 namespace AngularAuthAPI.Controllers
 {
@@ -42,23 +46,25 @@ namespace AngularAuthAPI.Controllers
                 return BadRequest();
             }
 
-            // UserDTO userSignedIn = new(user.Id, user.FirstName, user.LastName, user.Username, user.Password, user.Token, user.Role);
-            UserDTO userSignedIn = new(user);
+            var newToken = CreateJWT(user);
 
-            
+           
             if (!PasswordHasher.VerifyPassword(userObj.Password, user.Password)) return BadRequest(new
             {
                 Message = "Password is incorrect"
             });
 
+            // UserDTO userSignedIn = new(user.Id, user.FirstName, user.LastName, user.Username, user.Password, user.Token, user.Role);
+            UserDTO userSignedIn = new(user, newToken);
+
             // if username found and password matches
+            
             return Ok(new
             {
+                Token = userSignedIn.usersToken,
                 Message = "login Success! So nice to see you again " + userSignedIn.usersUsername,
-                signedIn = userSignedIn
             });
-
-            // return usersDTO;
+            
         }
 
         [HttpPost("register")]
@@ -116,6 +122,36 @@ namespace AngularAuthAPI.Controllers
             if (!(Regex.IsMatch(givenPassword, regexChecker))) sb.Append("Password should be a-z, A-Z, 0-9" + Environment.NewLine);
 
             return sb.ToString();
+        }
+
+        private string CreateJWT(User givenUserObj)
+        {
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(".....secretKey.....");
+            var identity = new ClaimsIdentity(new Claim[]
+            {
+                new Claim(ClaimTypes.Role, givenUserObj.Role),
+                new Claim(ClaimTypes.Name, givenUserObj.FirstName + givenUserObj.LastName)
+            });
+
+            var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = identity,
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = credentials
+            };
+
+            var token = jwtTokenHandler.CreateToken(tokenDescriptor);
+
+            return jwtTokenHandler.WriteToken(token);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<User>> GetAllUsers()
+        {
+            return Ok(await _authContext.Users.ToListAsync());
         }
     }
 }
