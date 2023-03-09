@@ -1,18 +1,17 @@
 ﻿using AngularAuthAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace AngularAuthAPI.DTOModels
 {
-    public class UserDTO
+    public class CreateUserDTO
     {
-
-        public int? usersId { get; set; }
-
         public string? usersFirstName { get; set; }
 
         public string? usersLastName { get; set; }
 
+        [Required] // requires a username
         public string? usersUsername { get; set; }
 
         public string? usersEmail { get; set; }
@@ -22,18 +21,13 @@ namespace AngularAuthAPI.DTOModels
         public string? usersToken { get; set; }
 
         public string? usersRole { get; set; }
+    }
+    public class UserDTO : CreateUserDTO
+    {
 
-        public UserDTO(User givenUser)
-        {
-            this.usersUsername = givenUser.Username;
-            this.usersEmail = givenUser.Email;
+        public int? usersId { get; set; }
 
-            this.usersFirstName = givenUser.FirstName;
-            this.usersLastName = givenUser.LastName;
+        public IList<UserDTO> users { get; set;}
 
-            this.usersPassword = givenUser.Password;
-            this.usersToken = givenUser.Token;
-            this.usersRole = givenUser.Role;
-        }
     }
 }
